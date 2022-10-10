@@ -151,33 +151,38 @@ public class Operations {
 
         System.out.print("ENTER THE VEHICLE REGISTRATION NUMBER - ");
         String reg_no = sc.next();
-        if (isVehiclePresent(reg_no)) {
-            System.out.print("VEHICLE WITH SAME REGISTRATION NUMBER ALREADY EXISTS.");
-        } else {
-            System.out.print("ENTER BRAND OF THE VEHICLE - ");
-            brand = sc.next();
-            System.out.print("ENTER THE MAXIMUM VELOCITY OF THE VEHICLE(KMPH) - ");
-            max_velocity = sc.nextInt();
-            System.out.print("ENTER CAPACITY(NUMBER OF SEATS) OF THE VEHICLE - ");
-            capacity = sc.nextInt();
-            System.out.println("CHOOSE THE TYPE OF THE VEHICLE - ");
-            System.out.println("1. PETROL DRIVEN");
-            System.out.println("2. DIESEL DRIVEN");
-            System.out.println("3. CNG/LPG DRIVEN");
-            vehicle_type = sc.nextInt();
-            System.out.print("ENTER THE PURCHASE COST OF THE VEHICLE - ");
-            purchase_cost = sc.nextInt();
+        Validator validator = new Validator();
+        if (validator.isValidRegistrationNumber(reg_no)) {
+            if (isVehiclePresent(reg_no)) {
+                System.out.print("VEHICLE WITH SAME REGISTRATION NUMBER ALREADY EXISTS.");
+            } else {
+                System.out.print("ENTER BRAND OF THE VEHICLE - ");
+                brand = sc.next();
+                System.out.print("ENTER THE MAXIMUM VELOCITY OF THE VEHICLE(KMPH) - ");
+                max_velocity = sc.nextInt();
+                System.out.print("ENTER CAPACITY(NUMBER OF SEATS) OF THE VEHICLE - ");
+                capacity = sc.nextInt();
+                System.out.println("CHOOSE THE TYPE OF THE VEHICLE - ");
+                System.out.println("1. PETROL DRIVEN");
+                System.out.println("2. DIESEL DRIVEN");
+                System.out.println("3. CNG/LPG DRIVEN");
+                vehicle_type = sc.nextInt();
+                System.out.print("ENTER THE PURCHASE COST OF THE VEHICLE - ");
+                purchase_cost = sc.nextInt();
 
-            Vehicle v = new Vehicle(reg_no, brand, max_velocity, capacity, vehicle_type, purchase_cost, 0.0);
-            vehicles.add(v);
-            File file = new File(file_vehicles);
-            try {
-                FileWriter fw = new FileWriter(file, true);
-                fw.write(v.toString());
-                fw.close();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
+                Vehicle v = new Vehicle(reg_no, brand, max_velocity, capacity, vehicle_type, purchase_cost, 0.0);
+                vehicles.add(v);
+                File file = new File(file_vehicles);
+                try {
+                    FileWriter fw = new FileWriter(file, true);
+                    fw.write(v.toString());
+                    fw.close();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             }
+        } else {
+            System.out.println("INVALID REGISTRATION NUMBER");
         }
     }
 

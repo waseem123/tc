@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class Submenus {
     public boolean login() {
         return true;
